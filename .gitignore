@@ -9,7 +9,7 @@ env/
 .venv
 
 # Datos generados (opcional, si no quieres subir archivos grandes)
-
+!data/fpga_io/**/*.npy
 results/
 *.npy
 *.npz
