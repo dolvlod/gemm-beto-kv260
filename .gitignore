@@ -15,6 +15,7 @@ results/
 *.bin
 # Excepción para los .npy dentro de fpga_io (debe ir DESPUÉS de *.npy)
 !data/fpga_io/**/*.npy
+!data/golden_inputs/**/*.npy
 # IDE
 .vscode/
 .idea/
