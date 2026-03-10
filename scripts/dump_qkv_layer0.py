@@ -7,9 +7,10 @@ from transformers import AutoModel
 
 MODEL_ID = "dccuchile/bert-base-spanish-wwm-cased"
 # Ruta de entrada (los casos golden_XX_seq64 con input_ids.npy y attention_mask.npy)
-BASE = "/home/dolv07/golden_beto"
+PROJECT_ROOT = os.path.expanduser("~/gemm-beto-kv260")
+BASE = os.path.join(PROJECT_ROOT, "data", "golden_inputs")
 
-# --- NUEVA RUTA DE SALIDA: data/golden dentro del proyecto ---
+
 # Usamos expanduser para obtener /home/dolv07 y construimos la ruta completa
 OUTDIR = os.path.join(os.path.expanduser("~"), "gemm-beto-kv260", "data", "golden")
 
