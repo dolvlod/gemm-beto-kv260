@@ -9,12 +9,12 @@ env/
 .venv
 
 # Datos generados (opcional, si no quieres subir archivos grandes)
-!data/fpga_io/**/*.npy
 results/
 *.npy
 *.npz
 *.bin
-
+# Excepción para los .npy dentro de fpga_io (debe ir DESPUÉS de *.npy)
+!data/fpga_io/**/*.npy
 # IDE
 .vscode/
 .idea/
