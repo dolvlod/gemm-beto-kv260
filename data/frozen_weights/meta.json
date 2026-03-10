@@ -1,0 +1,14 @@
+{
+  "scheme": "int8 symmetric per-channel weights, bias float32",
+  "range_int8": [
+    -127,
+    127
+  ],
+  "SRC": "/home/dolv07/gemm-beto-kv260/data/golden/golden_00_seq64",
+  "OUT": "/home/dolv07/gemm-beto-kv260/data/frozen_weights",
+  "notes": [
+    "Wq saved as int8; sw saved as float32 per output channel.",
+    "Reconstruction: W \u2248 Wq * sw[:,None].",
+    "Bias kept float32 for simplicity and fidelity."
+  ]
+}

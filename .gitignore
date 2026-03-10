@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+venv/
+env/
+.venv
+
+# Datos generados (opcional, si no quieres subir archivos grandes)
+data/fpga_io/
+results/
+*.npy
+*.npz
+*.bin
+
+# IDE
+.vscode/
+.idea/
+
+# Archivos temporales
+*.log
+*.tmp
+

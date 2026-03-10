@@ -1,0 +1,20 @@
+{
+  "model": "dccuchile/bert-base-spanish-wwm-cased",
+  "case": "golden_02_seq64",
+  "seq_len": 64,
+  "X_shape": [
+    1,
+    64,
+    768
+  ],
+  "Q_shape": [
+    1,
+    64,
+    768
+  ],
+  "dtype": "float32",
+  "sha256_X": "b1ce3e7ee464c508e97d8f984cb830aefd83b29f9363939b17dc351a9063bb8b",
+  "sha256_Q": "39f6b4d2bd3cf4ddced0c0fe007ddb47c2f3218180e055b883584b4219e8ec36",
+  "sha256_K": "7bf6b72d663c171534e540149bacc0bdfd2bc128eb73f440b6515c25cd0f5d1c",
+  "sha256_V": "2308274c1fe42a3b0ae21348a676444ae38500560c94af86e0c9de02ee7618a3"
+}
