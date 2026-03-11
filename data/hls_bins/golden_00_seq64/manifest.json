@@ -1,0 +1,70 @@
+{
+  "case": "golden_00_seq64",
+  "files": {
+    "Xq.bin": {
+      "shape": [
+        64,
+        768
+      ],
+      "dtype": "int8",
+      "sha256": "b37d26b4e4c867f228ef7a7776fc04b1cd3c2134fd0090dd2d4597fcd13aebbf"
+    },
+    "Wq.bin": {
+      "shape": [
+        768,
+        768
+      ],
+      "dtype": "int8",
+      "sha256": "f7dcd359fcaf611db003f52a1d72259eae58fd4efdc2ac202873b1892b57857b"
+    },
+    "Wk.bin": {
+      "shape": [
+        768,
+        768
+      ],
+      "dtype": "int8",
+      "sha256": "4778df1c970025804d233cc53eaf98ac8c10cc5ad5644750dd76c0e627a14d75"
+    },
+    "Wv.bin": {
+      "shape": [
+        768,
+        768
+      ],
+      "dtype": "int8",
+      "sha256": "7c76c25048713c902aa74728ca6ca2dd66b6bb85ebeb2016939e5325f49419e6"
+    },
+    "Qref.bin": {
+      "shape": [
+        64,
+        768
+      ],
+      "dtype": "int32",
+      "sha256": "14e69ea3660445f2260766b6093ddf3e7d7cbae4e8f5b1d49317c19fc1d96b15"
+    },
+    "Kref.bin": {
+      "shape": [
+        64,
+        768
+      ],
+      "dtype": "int32",
+      "sha256": "73bf261a6ce5097530dde6e4f3a40cd742f0ddc3d8991103cd95b4832c43bf66"
+    },
+    "Vref.bin": {
+      "shape": [
+        64,
+        768
+      ],
+      "dtype": "int32",
+      "sha256": "220b507cf5ed971f802010486a729041c34152526810ae8f41e2dd87f109eb74"
+    },
+    "sx.bin": {
+      "shape": [
+        1
+      ],
+      "dtype": "float32",
+      "sha256": "25c5974d509226841cf8219b396002cde71da7386db600c52203fbd5bb6604cb"
+    }
+  },
+  "description": "Archivos binarios para simulaci\u00f3n HLS",
+  "generated_by": "export_bins_for_hls.py (adaptado)"
+}
