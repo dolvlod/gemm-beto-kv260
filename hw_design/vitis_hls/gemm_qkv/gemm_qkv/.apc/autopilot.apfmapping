@@ -2,10 +2,8 @@
 <autopilotfilemapping:AutoPilotFileMapping xmlns:autopilotfilemapping="www.autoesl.com/autopilotfilemapping">
   <source>
     <originFiles name="gemm_int8.cpp" path="/home/dolv07/gemm-beto-kv260/hw_design/vitis_hls/gemm_qkv/src/gemm_int8.cpp"/>
-    <originFiles name="gemm_int8.cpp" path="/home/dolv07/gemm-beto-kv260/hw_design/vitis_hls/gemm_qkv/src/gemm_int8.cpp"/>
   </source>
   <testbench>
-    <originFiles name="tb.cpp" path="/home/dolv07/gemm-beto-kv260/hw_design/vitis_hls/gemm_qkv/tb/tb.cpp"/>
     <originFiles name="tb.cpp" path="/home/dolv07/gemm-beto-kv260/hw_design/vitis_hls/gemm_qkv/tb/tb.cpp"/>
   </testbench>
 </autopilotfilemapping:AutoPilotFileMapping>

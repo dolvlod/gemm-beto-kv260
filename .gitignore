@@ -25,3 +25,7 @@ results/
 *.log
 *.tmp
 
+
+# HLS generated files
+**/.autopilot/
+**/solution*/.autopilot/

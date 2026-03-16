@@ -1,0 +1,23 @@
+[
+  {
+    "functionLabel": "",
+    "functionName": "gemm_int8",
+    "id": 0,
+    "ifcond": "",
+    "insert_position": "",
+    "label": "",
+    "pragma": {
+      "name": "TOP",
+      "option": [
+        {
+          "name": "name",
+          "value": "gemm_int8"
+        }
+      ]
+    },
+    "slx": false,
+    "sourceFile": "/home/dolv07/gemm-beto-kv260/hw_design/vitis_hls/gemm_qkv/gemm_qkv/solution1/csynth.tcl",
+    "sourceLine": 15,
+    "success": true
+  }
+]

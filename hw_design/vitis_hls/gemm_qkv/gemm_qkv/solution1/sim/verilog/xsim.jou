@@ -1,0 +1,15 @@
+#-----------------------------------------------------------
+# xsim v2023.1 (64-bit)
+# SW Build 3865809 on Sun May  7 15:04:56 MDT 2023
+# IP Build 3864474 on Sun May  7 20:36:21 MDT 2023
+# SharedData Build 3865790 on Sun May 07 13:33:03 MDT 2023
+# Start of session at: Thu Mar 12 12:17:03 2026
+# Process ID: 28975
+# Current directory: /home/dolv07/gemm-beto-kv260/hw_design/vitis_hls/gemm_qkv/gemm_qkv/solution1/sim/verilog
+# Command line: xsim -mode tcl -source {xsim.dir/gemm_int8/xsim_script.tcl}
+# Log file: /home/dolv07/gemm-beto-kv260/hw_design/vitis_hls/gemm_qkv/gemm_qkv/solution1/sim/verilog/xsim.log
+# Journal file: /home/dolv07/gemm-beto-kv260/hw_design/vitis_hls/gemm_qkv/gemm_qkv/solution1/sim/verilog/xsim.jou
+# Running On: 192, OS: Linux, CPU Frequency: 1918.037 MHz, CPU Physical cores: 4, Host memory: 12435 MB
+#-----------------------------------------------------------
+source xsim.dir/gemm_int8/xsim_script.tcl
+source gemm_int8.tcl

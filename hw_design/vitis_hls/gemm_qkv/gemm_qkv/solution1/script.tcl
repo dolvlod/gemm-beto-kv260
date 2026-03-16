@@ -7,14 +7,14 @@
 open_project gemm_qkv
 set_top gemm_int8
 add_files src/gemm_int8.cpp
-add_files src/gemm_int8.cpp
-add_files -tb tb/tb.cpp
-add_files -tb tb/tb.cpp
+add_files -tb tb/tb.cpp -cflags "-Wno-unknown-pragmas"
 open_solution "solution1" -flow_target vivado
 set_part {xck26-sfvc784-2LV-c}
 create_clock -period 10 -name default
+config_cosim -tool xsim
+config_export -output /home/dolv07/gemm-beto-kv260/results/hls/gemm_int8_vivado_ip.zip
 #source "./gemm_qkv/solution1/directives.tcl"
 csim_design
 csynth_design
 cosim_design
-export_design -format ip_catalog
+export_design -rtl verilog -format ip_catalog -output /home/dolv07/gemm-beto-kv260/results/hls/gemm_int8_vivado_ip.zip

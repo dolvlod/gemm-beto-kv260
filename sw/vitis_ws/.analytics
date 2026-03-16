@@ -1,0 +1,10 @@
+timestamp=[2026-03-13 19:10:47], mode=WORKBENCH_START, duration=0:00:09.957, duration_ms=9957, data={}
+timestamp=[2026-03-13 19:10:47], mode=WORKBENCH_UI_INIT, duration=0:00:00.038, duration_ms=38, data={editors_count=0, platform_editors_count=0, projects_count=0, platform_projects_count=0, active_platform_editor=false, projects=}
+timestamp=[2026-03-13 19:10:48], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:01.210, duration_ms=1210, data={}
+timestamp=[2026-03-15 12:22:13], mode=WORKBENCH_START, duration=0:00:14.429, duration_ms=14429, data={}
+timestamp=[2026-03-15 12:22:13], mode=WORKBENCH_UI_INIT, duration=0:00:00.408, duration_ms=408, data={editors_count=0, platform_editors_count=0, projects_count=1, platform_projects_count=0, active_platform_editor=false, projects=RemoteSystemsTempFiles}
+timestamp=[2026-03-15 12:22:15], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:01.452, duration_ms=1452, data={}
+timestamp=[2026-03-15 13:09:28], mode=APP_CREATION, duration=0:00:25.677, duration_ms=25677, data={name=gemm_beto_app, project_type=sdk, os=standalone, processor=psu_cortexa53, runtime=cpp, platform=prototipo_1_wrapper, application_type=application}
+timestamp=[2026-03-15 14:30:26], mode=PLATFORM_GENERATION, duration=0:00:34.709, duration_ms=34709, data={name=prototipo_1_wrapper}
+timestamp=[2026-03-15 14:30:48], mode=BUILD, duration=0:00:12.830, duration_ms=12830, data={name=gemm_beto_app, configuration=Debug, clean_build=false}
+timestamp=[2026-03-15 21:26:16], mode=BUILD, duration=0:00:00.533, duration_ms=533, data={name=gemm_beto_app, configuration=Debug, clean_build=false}

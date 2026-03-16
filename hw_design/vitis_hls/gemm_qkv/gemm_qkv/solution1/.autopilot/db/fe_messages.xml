@@ -1,0 +1,75 @@
+<xilinx:hls_fe_msgs>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/home/dolv07/gemm-beto-kv260/hw_design/vitis_hls/gemm_qkv/gemm_qkv/solution1/csynth.tcl:15:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaContext="directive" ARG_PragmaFunction="gemm_int8" ARG_PragmaIsValid="1" ARG_PragmaOptions="name=gemm_int8" ARG_PragmaType="top" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="src/gemm_int8.cpp:16:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="gemm_int8" ARG_PragmaIsValid="1" ARG_PragmaOptions="m_axi port=X offset=slave bundle=gmem0 depth=49152" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="src/gemm_int8.cpp:17:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="gemm_int8" ARG_PragmaIsValid="1" ARG_PragmaOptions="m_axi port=W offset=slave bundle=gmem1 depth=589824" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="src/gemm_int8.cpp:18:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="gemm_int8" ARG_PragmaIsValid="1" ARG_PragmaOptions="m_axi port=Y offset=slave bundle=gmem2 depth=49152" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="src/gemm_int8.cpp:20:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="gemm_int8" ARG_PragmaIsValid="1" ARG_PragmaOptions="s_axilite port=X bundle=control" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="src/gemm_int8.cpp:21:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="gemm_int8" ARG_PragmaIsValid="1" ARG_PragmaOptions="s_axilite port=W bundle=control" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="src/gemm_int8.cpp:22:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="gemm_int8" ARG_PragmaIsValid="1" ARG_PragmaOptions="s_axilite port=Y bundle=control" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="src/gemm_int8.cpp:23:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="gemm_int8" ARG_PragmaIsValid="1" ARG_PragmaOptions="s_axilite port=return bundle=control" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="src/gemm_int8.cpp:26:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="gemm_int8" ARG_PragmaIsValid="1" ARG_PragmaOptions="variable=Xbuf type=ram_2p impl=bram" ARG_PragmaType="bind_storage" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="src/gemm_int8.cpp:31:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="gemm_int8" ARG_PragmaIsValid="1" ARG_PragmaOptions="II=1" ARG_PragmaType="pipeline" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="src/gemm_int8.cpp:42:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="gemm_int8" ARG_PragmaIsValid="1" ARG_PragmaOptions="variable=acc complete dim=2" ARG_PragmaType="array_partition" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="src/gemm_int8.cpp:47:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="gemm_int8" ARG_PragmaIsValid="1" ARG_PragmaOptions="II=1" ARG_PragmaType="pipeline" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="src/gemm_int8.cpp:57:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="gemm_int8" ARG_PragmaIsValid="1" ARG_PragmaOptions="variable=Xtile complete dim=2" ARG_PragmaType="array_partition" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="src/gemm_int8.cpp:58:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="gemm_int8" ARG_PragmaIsValid="1" ARG_PragmaOptions="variable=Wtile complete dim=2" ARG_PragmaType="array_partition" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="src/gemm_int8.cpp:63:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="gemm_int8" ARG_PragmaIsValid="1" ARG_PragmaOptions="II=1" ARG_PragmaType="pipeline" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="src/gemm_int8.cpp:71:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="gemm_int8" ARG_PragmaIsValid="1" ARG_PragmaOptions="II=1" ARG_PragmaType="pipeline" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="src/gemm_int8.cpp:79:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="gemm_int8" ARG_PragmaIsValid="1" ARG_PragmaOptions="II=1" ARG_PragmaType="pipeline" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="src/gemm_int8.cpp:82:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="gemm_int8" ARG_PragmaIsValid="1" ARG_PragmaOptions="factor=8" ARG_PragmaType="unroll" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="src/gemm_int8.cpp:93:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="gemm_int8" ARG_PragmaIsValid="1" ARG_PragmaOptions="II=1" ARG_PragmaType="pipeline" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_UNROLL" msg_id="214-291" msg_severity="INFO" msg_loc="src/gemm_int8.cpp:81:42" msg_body="Loop 'VITIS_LOOP_81_6' is marked as complete unroll implied by the pipeline pragma">
+        <args LoopName="VITIS_LOOP_81_6"/>
+    </msg>
+    <msg msg_groups="PRAGMA_UNROLL" msg_id="214-186" msg_severity="INFO" msg_loc="src/gemm_int8.cpp:15:0" msg_body="Unrolling loop 'VITIS_LOOP_81_6' (src/gemm_int8.cpp:81:42) in function 'gemm_int8' completely with a factor of 32">
+        <args Factor="32" LoopLoc="src/gemm_int8.cpp:81:42" LoopName="VITIS_LOOP_81_6"/>
+    </msg>
+    <msg msg_groups="PRAGMA_MISC" msg_id="214-248" msg_severity="INFO" msg_loc="src/gemm_int8.cpp:41:24" msg_body="Applying array_partition to 'acc': Complete partitioning on dimension 2.">
+        <args Dim="2" Mode="Complete" UOName="acc"/>
+    </msg>
+    <msg msg_groups="PRAGMA_MISC" msg_id="214-248" msg_severity="INFO" msg_loc="src/gemm_int8.cpp:55:27" msg_body="Applying array_partition to 'Xtile': Complete partitioning on dimension 2.">
+        <args Dim="2" Mode="Complete" UOName="Xtile"/>
+    </msg>
+    <msg msg_groups="PRAGMA_MISC" msg_id="214-248" msg_severity="INFO" msg_loc="src/gemm_int8.cpp:56:27" msg_body="Applying array_partition to 'Wtile': Complete partitioning on dimension 2.">
+        <args Dim="2" Mode="Complete" UOName="Wtile"/>
+    </msg>
+</xilinx:hls_fe_msgs>
+

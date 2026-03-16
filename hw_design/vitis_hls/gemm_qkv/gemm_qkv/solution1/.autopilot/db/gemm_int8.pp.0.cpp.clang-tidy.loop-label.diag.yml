@@ -1,0 +1,117 @@
+---
+MainSourceFile:  /home/dolv07/gemm-beto-kv260/hw_design/vitis_hls/gemm_qkv/gemm_qkv/solution1/.autopilot/db/gemm_int8.pp.0.cpp
+Diagnostics:     
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_1213_1:  '
+    FileOffset:      1213
+    FilePath:        /opt/Xilinx-2023.1/Vitis_HLS/2023.1/common/technology/autopilot/etc/ap_int_base.h
+    Replacements:    
+      - FilePath:        /home/dolv07/gemm-beto-kv260/hw_design/vitis_hls/gemm_qkv/gemm_qkv/solution1/.autopilot/db/gemm_int8.pp.0.cpp
+        Offset:          55530
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_1213_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_676_1:  '
+    FileOffset:      676
+    FilePath:        /opt/Xilinx-2023.1/Vitis_HLS/2023.1/common/technology/autopilot/etc/ap_int_ref.h
+    Replacements:    
+      - FilePath:        /home/dolv07/gemm-beto-kv260/hw_design/vitis_hls/gemm_qkv/gemm_qkv/solution1/.autopilot/db/gemm_int8.pp.0.cpp
+        Offset:          283078
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_676_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_690_1:  '
+    FileOffset:      690
+    FilePath:        /opt/Xilinx-2023.1/Vitis_HLS/2023.1/common/technology/autopilot/etc/ap_int_ref.h
+    Replacements:    
+      - FilePath:        /home/dolv07/gemm-beto-kv260/hw_design/vitis_hls/gemm_qkv/gemm_qkv/solution1/.autopilot/db/gemm_int8.pp.0.cpp
+        Offset:          283542
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_690_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_704_1:  '
+    FileOffset:      704
+    FilePath:        /opt/Xilinx-2023.1/Vitis_HLS/2023.1/common/technology/autopilot/etc/ap_int_ref.h
+    Replacements:    
+      - FilePath:        /home/dolv07/gemm-beto-kv260/hw_design/vitis_hls/gemm_qkv/gemm_qkv/solution1/.autopilot/db/gemm_int8.pp.0.cpp
+        Offset:          284007
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_704_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_1247_1:  '
+    FileOffset:      1247
+    FilePath:        /opt/Xilinx-2023.1/Vitis_HLS/2023.1/common/technology/autopilot/etc/ap_fixed_base.h
+    Replacements:    
+      - FilePath:        /home/dolv07/gemm-beto-kv260/hw_design/vitis_hls/gemm_qkv/gemm_qkv/solution1/.autopilot/db/gemm_int8.pp.0.cpp
+        Offset:          566964
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_1247_1: '
+  - DiagnosticName:  clang-diagnostic-error
+    Message:         'Invalid Directive: for current device, ram_2p + bram is invalid combination for BIND_STORAGE''s option ''type + impl'''
+    FileOffset:      26
+    FilePath:        /home/dolv07/gemm-beto-kv260/hw_design/vitis_hls/gemm_qkv/src/gemm_int8.cpp
+    Replacements:    
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_30_1:  '
+    FileOffset:      30
+    FilePath:        /home/dolv07/gemm-beto-kv260/hw_design/vitis_hls/gemm_qkv/src/gemm_int8.cpp
+    Replacements:    
+      - FilePath:        /home/dolv07/gemm-beto-kv260/hw_design/vitis_hls/gemm_qkv/gemm_qkv/solution1/.autopilot/db/gemm_int8.pp.0.cpp
+        Offset:          935957
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_30_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_46_2:  '
+    FileOffset:      46
+    FilePath:        /home/dolv07/gemm-beto-kv260/hw_design/vitis_hls/gemm_qkv/src/gemm_int8.cpp
+    Replacements:    
+      - FilePath:        /home/dolv07/gemm-beto-kv260/hw_design/vitis_hls/gemm_qkv/gemm_qkv/solution1/.autopilot/db/gemm_int8.pp.0.cpp
+        Offset:          936328
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_46_2: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_62_3:  '
+    FileOffset:      62
+    FilePath:        /home/dolv07/gemm-beto-kv260/hw_design/vitis_hls/gemm_qkv/src/gemm_int8.cpp
+    Replacements:    
+      - FilePath:        /home/dolv07/gemm-beto-kv260/hw_design/vitis_hls/gemm_qkv/gemm_qkv/solution1/.autopilot/db/gemm_int8.pp.0.cpp
+        Offset:          936779
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_62_3: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_70_4:  '
+    FileOffset:      70
+    FilePath:        /home/dolv07/gemm-beto-kv260/hw_design/vitis_hls/gemm_qkv/src/gemm_int8.cpp
+    Replacements:    
+      - FilePath:        /home/dolv07/gemm-beto-kv260/hw_design/vitis_hls/gemm_qkv/gemm_qkv/solution1/.autopilot/db/gemm_int8.pp.0.cpp
+        Offset:          937010
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_70_4: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_78_5:  '
+    FileOffset:      78
+    FilePath:        /home/dolv07/gemm-beto-kv260/hw_design/vitis_hls/gemm_qkv/src/gemm_int8.cpp
+    Replacements:    
+      - FilePath:        /home/dolv07/gemm-beto-kv260/hw_design/vitis_hls/gemm_qkv/gemm_qkv/solution1/.autopilot/db/gemm_int8.pp.0.cpp
+        Offset:          937244
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_78_5: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_81_6:  '
+    FileOffset:      81
+    FilePath:        /home/dolv07/gemm-beto-kv260/hw_design/vitis_hls/gemm_qkv/src/gemm_int8.cpp
+    Replacements:    
+      - FilePath:        /home/dolv07/gemm-beto-kv260/hw_design/vitis_hls/gemm_qkv/gemm_qkv/solution1/.autopilot/db/gemm_int8.pp.0.cpp
+        Offset:          937354
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_81_6: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_92_7:  '
+    FileOffset:      92
+    FilePath:        /home/dolv07/gemm-beto-kv260/hw_design/vitis_hls/gemm_qkv/src/gemm_int8.cpp
+    Replacements:    
+      - FilePath:        /home/dolv07/gemm-beto-kv260/hw_design/vitis_hls/gemm_qkv/gemm_qkv/solution1/.autopilot/db/gemm_int8.pp.0.cpp
+        Offset:          937675
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_92_7: '
+...

@@ -1,0 +1,17 @@
+{
+  "0": {
+    "basicblocks": 177,
+    "calls": "",
+    "file": "gemm_int8.cpp",
+    "fileloc": 11,
+    "instructions": 1529,
+    "loads": {
+      "L": 129
+    },
+    "name": "gemm_int8",
+    "stores": {
+      "L": 129
+    },
+    "total_instructions": 1529
+  }
+}

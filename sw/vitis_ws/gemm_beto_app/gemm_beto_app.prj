@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ASCII"?>
+<sdkproject:SdkProject xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sdkproject="http://www.xilinx.com/sdkproject" name="gemm_beto_app" location="/home/dolv07/gemm-beto-kv260/sw/vitis_ws/gemm_beto_app" platform="/home/dolv07/gemm-beto-kv260/sw/vitis_ws/prototipo_1_wrapper/export/prototipo_1_wrapper/prototipo_1_wrapper.xpfm" platformUID="xilinx:kv260_som::0.0(custom)" systemProject="gemm_beto_system" sysConfig="prototipo_1_wrapper" runtime="cpp" cpu="standalone_psu_cortexa53_0" cpuInstance="psu_cortexa53_0" os="standalone" mssSignature="4b49928be9cb62169a8c34e46bdd5a96">
+  <configuration name="Debug" id="xilinx.gnu.arm.a53.exe.debug.493344798">
+    <configBuildOptions xsi:type="sdkproject:SdkOptions"/>
+    <lastBuildOptions xsi:type="sdkproject:SdkOptions"/>
+  </configuration>
+  <configuration name="Release" id="xilinx.gnu.arm.a53.exe.release.1354175876" dirty="true">
+    <configBuildOptions xsi:type="sdkproject:SdkOptions"/>
+  </configuration>
+  <template appTemplateName="empty_application"/>
+</sdkproject:SdkProject>

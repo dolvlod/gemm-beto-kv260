@@ -1,0 +1,55 @@
+<profile>
+
+<section name = "Vitis HLS Report for 'gemm_int8'" level="0">
+<item name = "Date">Thu Mar 12 11:38:53 2026
+</item>
+<item name = "Version">2023.1 (Build 3854077 on May  4 2023)</item>
+<item name = "Project">gemm_qkv</item>
+<item name = "Solution">solution1 (Vivado IP Flow Target)</item>
+<item name = "Product family">zynquplus</item>
+<item name = "Target device">xck26-sfvc784-2LV-c</item>
+</section>
+
+<section name = "Performance Estimates" level="0">
+<item name = "Timing">
+<section name = "" level="1">
+<item name = "Summary"><table name="" hasTotal="0">
+<keys size="4">Clock, Target, Estimated, Uncertainty</keys>
+<column name="ap_clk">10.00 ns, 7.300 ns, 2.70 ns</column>
+</table>
+</item>
+</section>
+</item>
+<item name = "Latency">
+<section name = "" level="1">
+<item name = "Summary"><table name="" hasTotal="0">
+<keys size="8">, min, max, min, max, min, max, Type</keys>
+<column name="">2945582, 2945582, 29.456 ms, 29.456 ms, 2945583, 2945583, no</column>
+</table>
+</item>
+<item name = "Detail">
+<section name = "" level="1">
+<item name = "Instance"><table name="" hasTotal="0">
+<keys size="9">Instance, Module, min, max, min, max, min, max, Type</keys>
+<column name="grp_gemm_int8_Pipeline_load_X_VITIS_LOOP_30_1_fu_1634">gemm_int8_Pipeline_load_X_VITIS_LOOP_30_1, 49155, 49155, 0.492 ms, 0.492 ms, 49155, 49155, no</column>
+<column name="grp_gemm_int8_Pipeline_init_acc_VITIS_LOOP_46_2_fu_1642">gemm_int8_Pipeline_init_acc_VITIS_LOOP_46_2, 1026, 1026, 10.260 us, 10.260 us, 1026, 1026, no</column>
+<column name="grp_gemm_int8_Pipeline_load_Xtile_VITIS_LOOP_62_3_fu_1678">gemm_int8_Pipeline_load_Xtile_VITIS_LOOP_62_3, 1026, 1026, 10.260 us, 10.260 us, 1026, 1026, no</column>
+<column name="grp_gemm_int8_Pipeline_VITIS_LOOP_70_4_fu_1718">gemm_int8_Pipeline_VITIS_LOOP_70_4, 1035, 1035, 10.350 us, 10.350 us, 1035, 1035, no</column>
+<column name="grp_gemm_int8_Pipeline_VITIS_LOOP_78_5_fu_1759">gemm_int8_Pipeline_VITIS_LOOP_78_5, 39, 39, 0.390 us, 0.390 us, 39, 39, no</column>
+<column name="grp_gemm_int8_Pipeline_VITIS_LOOP_92_7_fu_1924">gemm_int8_Pipeline_VITIS_LOOP_92_7, 34, 34, 0.340 us, 0.340 us, 34, 34, no</column>
+</table>
+</item>
+<item name = "Loop"><table name="" hasTotal="0">
+<keys size="8">Loop Name, min, max, Latency, achieved, target, Count, Pipelined</keys>
+<column name="- tile_m_tile_n">2896416, 2896416, 60342, -, -, 48, no</column>
+<column name=" + tile_k">57936, 57936, 2414, -, -, 24, no</column>
+<column name="  ++ compute">1376, 1376, 43, -, -, 32, no</column>
+<column name=" + store_Y">1376, 1376, 43, -, -, 32, no</column>
+</table>
+</item>
+</section>
+</item>
+</section>
+</item>
+</section>
+</profile>

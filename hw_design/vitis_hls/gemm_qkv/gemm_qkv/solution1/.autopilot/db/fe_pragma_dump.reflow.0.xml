@@ -1,0 +1,39 @@
+<pragmas>
+<pragma file="" line="0" pragmaType="inline" parentfunction="ap_int_base<64, true>::ap_int_base<32, true>(ap_int_base<32, true> const&)" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="ap_int_base<64, true>::ap_int_base(int)" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="ap_int<64>::ap_int<64, true>(ap_int_base<64, true> const&)" off="0" region="0" recursive="0"/>
+<pragma file="/opt/Xilinx-2023.1/Vitis_HLS/2023.1/common/technology/autopilot/etc/ap_common.h" line="515" pragmaType="inline" parentfunction="ssdm_int<64, true>::ssdm_int(long)" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="ap_int_base<32, true>::ap_int_base<8, true>(ap_int_base<8, true> const&)" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="checkOverflowBaseC" off="0" region="0" recursive="0"/>
+<pragma file="/opt/Xilinx-2023.1/Vitis_HLS/2023.1/common/technology/autopilot/etc/ap_common.h" line="515" pragmaType="inline" parentfunction="ssdm_int<32, true>::ssdm_int(int)" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="ap_int_base<32, true>::ap_int_base(int)" off="0" region="0" recursive="0"/>
+<pragma file="/opt/Xilinx-2023.1/Vitis_HLS/2023.1/common/technology/autopilot/etc/ap_common.h" line="0" pragmaType="inline" parentfunction="ssdm_int<32, true>::ssdm_int()" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="ap_int_base<32, true>::ap_int_base()" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="ap_int_base<8, true>::ap_int_base()" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="ap_int<8>::ap_int()" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="ap_int<32>::ap_int()" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="ap_int<32>::ap_int(int)" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="checkOverflowCsim" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="ap_int<32>::ap_int<8>(ap_int<8> const&)" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="ap_int_base<32, true>::RType<32, true>::mult operator*<32, true, 32, true>(ap_int_base<32, true> const&, ap_int_base<32, true> const&)" off="0" region="0" recursive="0"/>
+<pragma file="src/gemm_int8.cpp" line="47" pragmaType="pipeline" parentfunction="gemm_int8" off="0" ii="1" rewind="0" style=""/>
+<pragma file="src/gemm_int8.cpp" line="93" pragmaType="pipeline" parentfunction="gemm_int8" off="0" ii="1" rewind="0" style=""/>
+<pragma file="src/gemm_int8.cpp" line="63" pragmaType="pipeline" parentfunction="gemm_int8" off="0" ii="1" rewind="0" style=""/>
+<pragma file="src/gemm_int8.cpp" line="71" pragmaType="pipeline" parentfunction="gemm_int8" off="0" ii="1" rewind="0" style=""/>
+<pragma file="src/gemm_int8.cpp" line="79" pragmaType="pipeline" parentfunction="gemm_int8" off="0" ii="1" rewind="0" style=""/>
+<pragma file="src/gemm_int8.cpp" line="82" pragmaType="unroll" parentfunction="gemm_int8" factor="8" skip_exit_check="0"/>
+<pragma file="src/gemm_int8.cpp" line="31" pragmaType="pipeline" parentfunction="gemm_int8" off="0" ii="1" rewind="0" style=""/>
+<pragma file="src/gemm_int8.cpp" line="16" pragmaType="interface" parentfunction="gemm_int8" mode="m_axi" port="X" bundle="gmem0" offset="slave" name="" depth="49152" num_read_outstanding="-1" num_write_outstanding="-1" max_burst_read_length="-1" max_burst_write_length="-1" latency="-1" max_widen_bitwidth="-1" channel=""/>
+<pragma file="src/gemm_int8.cpp" line="17" pragmaType="interface" parentfunction="gemm_int8" mode="m_axi" port="W" bundle="gmem1" offset="slave" name="" depth="589824" num_read_outstanding="-1" num_write_outstanding="-1" max_burst_read_length="-1" max_burst_write_length="-1" latency="-1" max_widen_bitwidth="-1" channel=""/>
+<pragma file="src/gemm_int8.cpp" line="18" pragmaType="interface" parentfunction="gemm_int8" mode="m_axi" port="Y" bundle="gmem2" offset="slave" name="" depth="49152" num_read_outstanding="-1" num_write_outstanding="-1" max_burst_read_length="-1" max_burst_write_length="-1" latency="-1" max_widen_bitwidth="-1" channel=""/>
+<pragma file="src/gemm_int8.cpp" line="20" pragmaType="interface" parentfunction="gemm_int8" mode="s_axilite" port="X" bundle="control" offset="-1" name="" clock="" impl="" register="0"/>
+<pragma file="src/gemm_int8.cpp" line="21" pragmaType="interface" parentfunction="gemm_int8" mode="s_axilite" port="W" bundle="control" offset="-1" name="" clock="" impl="" register="0"/>
+<pragma file="src/gemm_int8.cpp" line="22" pragmaType="interface" parentfunction="gemm_int8" mode="s_axilite" port="Y" bundle="control" offset="-1" name="" clock="" impl="" register="0"/>
+<pragma file="src/gemm_int8.cpp" line="23" pragmaType="interface" parentfunction="gemm_int8" mode="s_axilite" port="" bundle="control" offset="-1" name="" clock="" impl="" register="0"/>
+<pragma file="src/gemm_int8.cpp" line="26" pragmaType="bind_storage" parentfunction="gemm_int8" op="666" impl="22" latency="-1" variable="Xbuf"/>
+<pragma file="src/gemm_int8.cpp" line="42" pragmaType="array_partition" parentfunction="gemm_int8" dim="2" factor="0" mode="complete" dynamic="0" variable="acc"/>
+<pragma file="src/gemm_int8.cpp" line="57" pragmaType="array_partition" parentfunction="gemm_int8" dim="2" factor="0" mode="complete" dynamic="0" variable="Xtile"/>
+<pragma file="src/gemm_int8.cpp" line="58" pragmaType="array_partition" parentfunction="gemm_int8" dim="2" factor="0" mode="complete" dynamic="0" variable="Wtile"/>
+<pragma file="/opt/Xilinx-2023.1/Vitis_HLS/2023.1/common/technology/autopilot/etc/ap_common.h" line="0" pragmaType="inline" parentfunction="ssdm_int<8, true>::ssdm_int()" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="ap_int_base<32, true>& ap_int_base<32, true>::operator+=<64, true>(ap_int_base<64, true> const&)" off="0" region="0" recursive="0"/>
+</pragmas>

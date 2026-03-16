@@ -1,0 +1,14 @@
+#-----------------------------------------------------------
+# Vivado v2023.1 (64-bit)
+# SW Build 3865809 on Sun May  7 15:04:56 MDT 2023
+# IP Build 3864474 on Sun May  7 20:36:21 MDT 2023
+# SharedData Build 3865790 on Sun May 07 13:33:03 MDT 2023
+# Start of session at: Fri Mar 13 12:19:44 2026
+# Process ID: 28615
+# Current directory: /home/dolv07/gemm-beto-kv260/hw_design/vivado/gemm_beto_kv260/gemm_beto_kv260.runs/prototipo_1_gemm_int8_0_1_synth_1
+# Command line: vivado -log prototipo_1_gemm_int8_0_1.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source prototipo_1_gemm_int8_0_1.tcl
+# Log file: /home/dolv07/gemm-beto-kv260/hw_design/vivado/gemm_beto_kv260/gemm_beto_kv260.runs/prototipo_1_gemm_int8_0_1_synth_1/prototipo_1_gemm_int8_0_1.vds
+# Journal file: /home/dolv07/gemm-beto-kv260/hw_design/vivado/gemm_beto_kv260/gemm_beto_kv260.runs/prototipo_1_gemm_int8_0_1_synth_1/vivado.jou
+# Running On: 192, OS: Linux, CPU Frequency: 3498.362 MHz, CPU Physical cores: 4, Host memory: 12435 MB
+#-----------------------------------------------------------
+source prototipo_1_gemm_int8_0_1.tcl -notrace
