@@ -1,0 +1,130 @@
+pkill -f hw_server
+pkill -f xsdb
+sleep 1
+
+source /opt/Xilinx/2025.1/Vitis/settings64.sh
+hw_server &
+/opt/Xilinx/2025.1/Vitis/bin/loader -exec xsdb
+
+
+connect -url tcp:127.0.0.1:3121
+configparams force-mem-accesses 1
+
+targets
+targets -set -filter {name =~ "PSU"}
+rst -system
+after 1000
+
+source /home/dolv07/gemm-beto-kv260/sw/vitis_ws/gemm_beto_app/_ide/psinit/psu_init.tcl
+psu_init
+psu_ps_pl_isolation_removal
+psu_ps_pl_reset_config
+
+targets -set -filter {name =~ "*Cortex-A53*#0*"}
+rst -processor -clear-registers
+stop
+
+fpga -f /home/dolv07/gemm-beto-kv260/sw/vitis_ws/gemm_beto_app/_ide/bitstream/prototipo_1_wrapper.bit
+dow -clear -bypass-cache-sync /home/dolv07/gemm-beto-kv260/sw/vitis_ws/gemm_beto_app/Debug/gemm_beto_app.elf
+
+con
+after 5000
+stop
+
+print g_status
+print g_total_errors
+print g_timeout_count
+print g_counts_per_second
+
+print g_elapsed_counts[0][0]
+print g_elapsed_counts[0][1]
+print g_elapsed_counts[0][2]
+print g_elapsed_counts[1][0]
+print g_elapsed_counts[1][1]
+print g_elapsed_counts[1][2]
+print g_elapsed_counts[2][0]
+print g_elapsed_counts[2][1]
+print g_elapsed_counts[2][2]
+
+print g_elapsed_us[0][0]
+print g_elapsed_us[0][1]
+print g_elapsed_us[0][2]
+print g_elapsed_us[1][0]
+print g_elapsed_us[1][1]
+print g_elapsed_us[1][2]
+print g_elapsed_us[2][0]
+print g_elapsed_us[2][1]
+print g_elapsed_us[2][2]
+
+print g_case_elapsed_us[0]
+print g_case_elapsed_us[1]
+print g_case_elapsed_us[2]
+print g_total_elapsed_us
+
+print g_mismatch[0][0]
+print g_mismatch[0][1]
+print g_mismatch[0][2]
+print g_mismatch[1][0]
+print g_mismatch[1][1]
+print g_mismatch[1][2]
+print g_mismatch[2][0]
+print g_mismatch[2][1]
+print g_mismatch[2][2]
+
+print g_case_index
+print g_proj_index
+
+print g_case_elapsed_counts[0]
+print g_case_elapsed_counts[1]
+print g_case_elapsed_counts[2]
+print g_total_elapsed_counts
+
+print g_y00[0][0]
+print g_y00[0][1]
+print g_y00[0][2]
+print g_y00[1][0]
+print g_y00[1][1]
+print g_y00[1][2]
+print g_y00[2][0]
+print g_y00[2][1]
+print g_y00[2][2]
+
+print g_checksum[0][0]
+print g_checksum[0][1]
+print g_checksum[0][2]
+print g_checksum[1][0]
+print g_checksum[1][1]
+print g_checksum[1][2]
+print g_checksum[2][0]
+print g_checksum[2][1]
+print g_checksum[2][2]
+
+print g_first_bad_idx[0][0]
+print g_first_bad_idx[0][1]
+print g_first_bad_idx[0][2]
+print g_first_bad_idx[1][0]
+print g_first_bad_idx[1][1]
+print g_first_bad_idx[1][2]
+print g_first_bad_idx[2][0]
+print g_first_bad_idx[2][1]
+print g_first_bad_idx[2][2]
+
+print g_first_bad_hw[0][0]
+print g_first_bad_hw[0][1]
+print g_first_bad_hw[0][2]
+print g_first_bad_hw[1][0]
+print g_first_bad_hw[1][1]
+print g_first_bad_hw[1][2]
+print g_first_bad_hw[2][0]
+print g_first_bad_hw[2][1]
+print g_first_bad_hw[2][2]
+
+print g_first_bad_ref[0][0]
+print g_first_bad_ref[0][1]
+print g_first_bad_ref[0][2]
+print g_first_bad_ref[1][0]
+print g_first_bad_ref[1][1]
+print g_first_bad_ref[1][2]
+print g_first_bad_ref[2][0]
+print g_first_bad_ref[2][1]
+print g_first_bad_ref[2][2]
