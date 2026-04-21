@@ -8,6 +8,8 @@
 #include "xil_types.h"
 #include "xparameters.h"
 #include "xtime_l.h"
+#include "xstatus.h"
+#include "xiicps.h"
 
 #include "embedded_golden_00.h"
 #include "embedded_golden_01.h"
@@ -20,6 +22,24 @@
 #else
   #error "No se encontro base address para gemm_int8 en xparameters.h"
 #endif
+
+/* ============================================================
+ * INA260 detectado en Linux como /sys/bus/i2c/devices/1-0040
+ * Ajusta solo este bloque si tu BSP usa otro XIICPS device.
+ * ============================================================ */
+#if defined(XPAR_XIICPS_0_DEVICE_ID) || defined(XPAR_XIICPS_1_DEVICE_ID)
+  #define INA260_I2C_ENABLED    1
+#else
+  #define INA260_I2C_ENABLED    0
+#endif
+
+#define INA260_I2C_ADDR         0x40U
+#define INA260_I2C_SCLK_HZ      100000U
+
+#define INA260_REG_CONFIG       0x00U
+#define INA260_REG_CURRENT      0x01U
+#define INA260_REG_BUS_VOLTAGE  0x02U
+#define INA260_REG_POWER        0x03U
 
 #define REG_CTRL    0x00U
 #define REG_X_LO    0x10U
@@ -50,6 +70,7 @@
 #define Y_ELEMS EMBED_CASE_Y_ELEMS
 
 #define GEMM_TIMEOUT_CYCLES 200000000U
+#define I2C_TIMEOUT_LOOPS   1000000U
 
 typedef struct {
     const char    *name;
@@ -106,9 +127,57 @@ volatile uint64_t g_total_elapsed_us = 0;
 volatile uint64_t g_counts_per_second = COUNTS_PER_SECOND;
 
 /* ============================================================
+ * Variables nuevas para energia/potencia via INA260
+ * ============================================================ */
+volatile uint32_t g_ina260_enabled = INA260_I2C_ENABLED;
+volatile uint32_t g_ina260_addr = INA260_I2C_ADDR;
+volatile uint32_t g_ina260_sclk_hz = INA260_I2C_SCLK_HZ;
+volatile uint32_t g_ina260_init_status = 0xFFFFFFFFU;
+volatile uint32_t g_ina260_last_status = 0;
+volatile uint32_t g_ina260_ok = 0;
+
+
+volatile uint32_t g_ina260_device_id_used = 0xFFFFFFFFU;
+volatile uint32_t g_ina260_cfg_baseaddr = 0U;
+
+volatile uint32_t g_ina260_probe_status_dev0 = 0xFFFFFFFFU;
+volatile uint32_t g_ina260_probe_status_dev1 = 0xFFFFFFFFU;
+
+volatile uint32_t g_ina260_debug_step  = 0U;
+volatile uint32_t g_ina260_debug_reg   = 0U;
+volatile uint32_t g_ina260_debug_wait1 = 0U;
+volatile uint32_t g_ina260_debug_send  = 0U;
+volatile uint32_t g_ina260_debug_wait2 = 0U;
+volatile uint32_t g_ina260_debug_recv  = 0U;
+volatile uint32_t g_ina260_debug_wait3 = 0U;
+
+
+volatile uint32_t g_idle_power_mw = 0;
+volatile int32_t  g_idle_current_ma = 0;
+volatile uint32_t g_idle_bus_mv = 0;
+
+volatile uint32_t g_power_before_mw[NUM_CASES][NUM_PROJS];
+volatile uint32_t g_power_after_mw[NUM_CASES][NUM_PROJS];
+volatile uint32_t g_power_avg_mw[NUM_CASES][NUM_PROJS];
+
+volatile int32_t  g_current_before_ma[NUM_CASES][NUM_PROJS];
+volatile int32_t  g_current_after_ma[NUM_CASES][NUM_PROJS];
+
+volatile uint32_t g_bus_before_mv[NUM_CASES][NUM_PROJS];
+volatile uint32_t g_bus_after_mv[NUM_CASES][NUM_PROJS];
+
+volatile uint64_t g_energy_dyn_nj[NUM_CASES][NUM_PROJS];
+volatile uint64_t g_case_energy_dyn_nj[NUM_CASES];
+volatile uint64_t g_total_energy_dyn_nj = 0;
+
+/* ============================================================
  * Un solo buffer de salida, reutilizado en las 9 corridas
  * ============================================================ */
 __attribute__((aligned(64))) static int32_t Y_buf[Y_ELEMS];
+
+#if INA260_I2C_ENABLED
+static XIicPs g_iicps;
+#endif
 
 /* ============================================================
  * Tabla de casos
@@ -217,6 +286,253 @@ static uint64_t counts_to_us(uint64_t counts)
     return (counts * 1000000ULL) / (uint64_t)COUNTS_PER_SECOND;
 }
 
+#if INA260_I2C_ENABLED
+static int i2c_wait_not_busy(void)
+{
+    uint32_t timeout = I2C_TIMEOUT_LOOPS;
+
+    while (XIicPs_BusIsBusy(&g_iicps)) {
+        if (timeout == 0U) {
+            return XST_FAILURE;
+        }
+        timeout--;
+    }
+
+    return XST_SUCCESS;
+}
+
+
+
+static int ina260_try_init_device(u16 dev_id)
+{
+    XIicPs_Config *cfg;
+    int status;
+
+    cfg = XIicPs_LookupConfig(dev_id);
+    if (cfg == NULL) {
+        return XST_FAILURE;
+    }
+
+    status = XIicPs_CfgInitialize(&g_iicps, cfg, cfg->BaseAddress);
+    if (status != XST_SUCCESS) {
+        return status;
+    }
+
+    status = XIicPs_SelfTest(&g_iicps);
+    if (status != XST_SUCCESS) {
+        return status;
+    }
+
+    status = XIicPs_SetSClk(&g_iicps, INA260_I2C_SCLK_HZ);
+    if (status != XST_SUCCESS) {
+        return status;
+    }
+
+    g_ina260_device_id_used = (uint32_t)dev_id;
+    g_ina260_cfg_baseaddr = (uint32_t)cfg->BaseAddress;
+
+    return XST_SUCCESS;
+}
+
+static int ina260_init(void)
+{
+    int status = XST_FAILURE;
+
+    g_ina260_device_id_used = 0xFFFFFFFFU;
+    g_ina260_cfg_baseaddr = 0U;
+    g_ina260_probe_status_dev0 = 0xFFFFFFFFU;
+    g_ina260_probe_status_dev1 = 0xFFFFFFFFU;
+
+#if defined(XPAR_XIICPS_1_DEVICE_ID)
+    g_ina260_debug_step = 11U;
+    status = ina260_try_init_device(XPAR_XIICPS_1_DEVICE_ID);
+    g_ina260_probe_status_dev1 = (uint32_t)status;
+    if (status == XST_SUCCESS) {
+        return XST_SUCCESS;
+    }
+#endif
+
+#if defined(XPAR_XIICPS_0_DEVICE_ID)
+    g_ina260_debug_step = 12U;
+    status = ina260_try_init_device(XPAR_XIICPS_0_DEVICE_ID);
+    g_ina260_probe_status_dev0 = (uint32_t)status;
+    if (status == XST_SUCCESS) {
+        return XST_SUCCESS;
+    }
+#endif
+
+    return XST_FAILURE;
+}
+
+static int ina260_read_reg16(uint8_t reg, uint16_t *out)
+{
+    uint8_t tx;
+    uint8_t rx[2];
+    int status;
+
+    tx = reg;
+
+    g_ina260_debug_reg = (uint32_t)reg;
+    g_ina260_debug_step = 21U;
+    g_ina260_debug_wait1 = 0U;
+    g_ina260_debug_send  = 0U;
+    g_ina260_debug_wait2 = 0U;
+    g_ina260_debug_recv  = 0U;
+    g_ina260_debug_wait3 = 0U;
+
+    status = i2c_wait_not_busy();
+    g_ina260_debug_wait1 = (uint32_t)status;
+    if (status != XST_SUCCESS) {
+        return status;
+    }
+
+    XIicPs_SetOptions(&g_iicps, XIICPS_REP_START_OPTION);
+
+    g_ina260_debug_step = 22U;
+    status = XIicPs_MasterSendPolled(&g_iicps, &tx, 1, INA260_I2C_ADDR);
+    g_ina260_debug_send = (uint32_t)status;
+    if (status != XST_SUCCESS) {
+        XIicPs_ClearOptions(&g_iicps, XIICPS_REP_START_OPTION);
+        return status;
+    }
+
+    /* IMPORTANTE:
+     * NO esperar bus-not-busy aqui.
+     * Con repeated-start, el siguiente paso correcto es el RECV inmediato.
+     */
+    g_ina260_debug_step = 24U;
+    status = XIicPs_MasterRecvPolled(&g_iicps, rx, 2, INA260_I2C_ADDR);
+    g_ina260_debug_recv = (uint32_t)status;
+    XIicPs_ClearOptions(&g_iicps, XIICPS_REP_START_OPTION);
+    if (status != XST_SUCCESS) {
+        return status;
+    }
+
+    g_ina260_debug_step = 25U;
+    status = i2c_wait_not_busy();
+    g_ina260_debug_wait3 = (uint32_t)status;
+    if (status != XST_SUCCESS) {
+        return status;
+    }
+
+    *out = ((uint16_t)rx[0] << 8) | (uint16_t)rx[1];
+    g_ina260_debug_step = 26U;
+
+    return XST_SUCCESS;
+}
+
+static int ina260_read_power_mw(uint32_t *mw)
+{
+    uint16_t raw;
+    int status;
+
+    status = ina260_read_reg16(INA260_REG_POWER, &raw);
+    if (status != XST_SUCCESS) {
+        return status;
+    }
+
+    *mw = (uint32_t)raw * 10U; /* 10 mW / bit */
+    return XST_SUCCESS;
+}
+
+static int ina260_read_current_ma(int32_t *ma)
+{
+    uint16_t raw_u;
+    int16_t raw_s;
+    int status;
+
+    status = ina260_read_reg16(INA260_REG_CURRENT, &raw_u);
+    if (status != XST_SUCCESS) {
+        return status;
+    }
+
+    raw_s = (int16_t)raw_u;
+    *ma = ((int32_t)raw_s * 125) / 100; /* 1.25 mA / bit */
+
+    return XST_SUCCESS;
+}
+
+static int ina260_read_bus_mv(uint32_t *mv)
+{
+    uint16_t raw;
+    int status;
+
+    status = ina260_read_reg16(INA260_REG_BUS_VOLTAGE, &raw);
+    if (status != XST_SUCCESS) {
+        return status;
+    }
+
+    *mv = ((uint32_t)raw * 125) / 100; /* 1.25 mV / bit */
+    return XST_SUCCESS;
+}
+
+static int ina260_sample(uint32_t *power_mw, int32_t *current_ma, uint32_t *bus_mv)
+{
+    int status;
+
+    status = ina260_read_power_mw(power_mw);
+    if (status != XST_SUCCESS) {
+        g_ina260_last_status = (uint32_t)status;
+        return status;
+    }
+
+    status = ina260_read_current_ma(current_ma);
+    if (status != XST_SUCCESS) {
+        g_ina260_last_status = (uint32_t)status;
+        return status;
+    }
+
+    status = ina260_read_bus_mv(bus_mv);
+    if (status != XST_SUCCESS) {
+        g_ina260_last_status = (uint32_t)status;
+        return status;
+    }
+
+    g_ina260_last_status = 0U;
+    return XST_SUCCESS;
+}
+#else
+
+static int ina260_init(void)
+{
+    return XST_FAILURE;
+}
+
+static int ina260_sample(uint32_t *power_mw, int32_t *current_ma, uint32_t *bus_mv)
+{
+    (void)power_mw;
+    (void)current_ma;
+    (void)bus_mv;
+    return XST_FAILURE;
+}
+
+#endif
+
+static void update_energy_estimate(int case_idx, int proj_idx)
+{
+    uint32_t p_avg;
+    uint32_t p_dyn;
+    uint64_t e_nj;
+
+    p_avg = (g_power_before_mw[case_idx][proj_idx] +
+             g_power_after_mw[case_idx][proj_idx]) / 2U;
+
+    g_power_avg_mw[case_idx][proj_idx] = p_avg;
+
+    if (p_avg > g_idle_power_mw) {
+        p_dyn = p_avg - g_idle_power_mw;
+    } else {
+        p_dyn = 0U;
+    }
+
+    /* mW * us = nJ */
+    e_nj = (uint64_t)p_dyn * (uint64_t)g_elapsed_us[case_idx][proj_idx];
+
+    g_energy_dyn_nj[case_idx][proj_idx] = e_nj;
+    g_case_energy_dyn_nj[case_idx] += e_nj;
+    g_total_energy_dyn_nj += e_nj;
+}
+
 static int gemm_start_wait(
     const int8_t *X,
     const int8_t *W,
@@ -278,6 +594,13 @@ static uint32_t run_projection(
 
     memset(Y_buf, 0, sizeof(Y_buf));
 
+    if (g_ina260_ok != 0U) {
+        (void)ina260_sample(
+            (uint32_t *)&g_power_before_mw[case_idx][proj_idx],
+            (int32_t  *)&g_current_before_ma[case_idx][proj_idx],
+            (uint32_t *)&g_bus_before_mv[case_idx][proj_idx]);
+    }
+
     rc = gemm_start_wait(gc->Xq,
                          W,
                          Y_buf,
@@ -287,6 +610,13 @@ static uint32_t run_projection(
                          &g_t_end[case_idx][proj_idx],
                          &g_elapsed_counts[case_idx][proj_idx],
                          &g_elapsed_us[case_idx][proj_idx]);
+
+    if (g_ina260_ok != 0U) {
+        (void)ina260_sample(
+            (uint32_t *)&g_power_after_mw[case_idx][proj_idx],
+            (int32_t  *)&g_current_after_ma[case_idx][proj_idx],
+            (uint32_t *)&g_bus_after_mv[case_idx][proj_idx]);
+    }
 
     if (rc != 0) {
         g_mismatch[case_idx][proj_idx] = 0xFFFFFFFFU;
@@ -306,6 +636,10 @@ static uint32_t run_projection(
         &g_first_bad_hw[case_idx][proj_idx],
         &g_first_bad_ref[case_idx][proj_idx]);
 
+    if (g_ina260_ok != 0U) {
+        update_energy_estimate(case_idx, proj_idx);
+    }
+
     xil_printf("%s/%s: Y[0]=%ld  REF[0]=%ld  checksum256=%ld  mismatches=%lu  counts=%lu  us=%lu\r\n",
                gc->name,
                proj_name(proj_idx),
@@ -315,6 +649,15 @@ static uint32_t run_projection(
                (unsigned long)g_mismatch[case_idx][proj_idx],
                (unsigned long)g_elapsed_counts[case_idx][proj_idx],
                (unsigned long)g_elapsed_us[case_idx][proj_idx]);
+
+    if (g_ina260_ok != 0U) {
+        xil_printf("%s/%s: INA260 P_before=%lu mW  P_after=%lu mW  P_avg=%lu mW\r\n",
+                   gc->name,
+                   proj_name(proj_idx),
+                   (unsigned long)g_power_before_mw[case_idx][proj_idx],
+                   (unsigned long)g_power_after_mw[case_idx][proj_idx],
+                   (unsigned long)g_power_avg_mw[case_idx][proj_idx]);
+    }
 
     if (g_mismatch[case_idx][proj_idx] != 0U) {
         xil_printf("%s/%s: first_bad idx=%lu hw=%ld ref=%ld\r\n",
@@ -332,6 +675,7 @@ int main(void)
 {
     int c;
     uint32_t errors_this_run;
+    int ina_status;
 
     g_status = 1;
     g_total_errors = 0;
@@ -362,9 +706,71 @@ int main(void)
     memset((void*)g_addr_ref, 0, sizeof(g_addr_ref));
     g_addr_y = (uint64_t)(uintptr_t)Y_buf;
 
+    memset((void*)g_power_before_mw, 0, sizeof(g_power_before_mw));
+    memset((void*)g_power_after_mw, 0, sizeof(g_power_after_mw));
+    memset((void*)g_power_avg_mw, 0, sizeof(g_power_avg_mw));
+    memset((void*)g_current_before_ma, 0, sizeof(g_current_before_ma));
+    memset((void*)g_current_after_ma, 0, sizeof(g_current_after_ma));
+    memset((void*)g_bus_before_mv, 0, sizeof(g_bus_before_mv));
+    memset((void*)g_bus_after_mv, 0, sizeof(g_bus_after_mv));
+    memset((void*)g_energy_dyn_nj, 0, sizeof(g_energy_dyn_nj));
+    memset((void*)g_case_energy_dyn_nj, 0, sizeof(g_case_energy_dyn_nj));
+    g_total_energy_dyn_nj = 0;
+    g_idle_power_mw = 0;
+    g_idle_current_ma = 0;
+    g_idle_bus_mv = 0;
+    g_ina260_init_status = 0xFFFFFFFFU;
+    g_ina260_last_status = 0;
+    g_ina260_ok = 0;
+    g_ina260_device_id_used = 0xFFFFFFFFU;
+    g_ina260_cfg_baseaddr = 0U;
+    g_ina260_probe_status_dev0 = 0xFFFFFFFFU;
+    g_ina260_probe_status_dev1 = 0xFFFFFFFFU;
+    g_ina260_debug_step  = 0U;
+    g_ina260_debug_reg   = 0U;
+    g_ina260_debug_wait1 = 0U;
+    g_ina260_debug_send  = 0U;
+    g_ina260_debug_wait2 = 0U;
+    g_ina260_debug_recv  = 0U;
+    g_ina260_debug_wait3 = 0U;
+
     xil_printf("\r\n=== GEMM BETO phase B: 3 casos embebidos (00/01/02) ===\r\n");
     xil_printf("GEMM_BASE = 0x%08lx\r\n", (unsigned long)GEMM_BASE);
     xil_printf("COUNTS_PER_SECOND = %lu\r\n", (unsigned long)g_counts_per_second);
+
+    ina_status = ina260_init();
+    g_ina260_init_status = (uint32_t)ina_status;
+
+    if (ina_status == XST_SUCCESS) {
+        if (ina260_sample((uint32_t *)&g_idle_power_mw,
+                          (int32_t  *)&g_idle_current_ma,
+                          (uint32_t *)&g_idle_bus_mv) == XST_SUCCESS) {
+            g_ina260_ok = 1U;
+            xil_printf("INA260 OK: dev=%lu  base=0x%08lx  addr=0x%02lx  idleP=%lu mW  idleI=%ld mA  idleV=%lu mV\r\n",
+                       (unsigned long)g_ina260_device_id_used,
+                       (unsigned long)g_ina260_cfg_baseaddr,
+                       (unsigned long)g_ina260_addr,
+                       (unsigned long)g_idle_power_mw,
+                       (long)g_idle_current_ma,
+                       (unsigned long)g_idle_bus_mv);
+        } else {
+            xil_printf("INA260 init OK pero fallo lectura inicial: dev=%lu base=0x%08lx last=%lu step=%lu reg=0x%02lx w1=%lu send=%lu w2=%lu recv=%lu w3=%lu\r\n",
+                       (unsigned long)g_ina260_device_id_used,
+                       (unsigned long)g_ina260_cfg_baseaddr,
+                       (unsigned long)g_ina260_last_status,
+                       (unsigned long)g_ina260_debug_step,
+                       (unsigned long)g_ina260_debug_reg,
+                       (unsigned long)g_ina260_debug_wait1,
+                       (unsigned long)g_ina260_debug_send,
+                       (unsigned long)g_ina260_debug_wait2,
+                       (unsigned long)g_ina260_debug_recv,
+                       (unsigned long)g_ina260_debug_wait3);
+        }
+    } else {
+        xil_printf("INA260 no disponible en bare-metal; dev1=%lu dev0=%lu\r\n",
+                   (unsigned long)g_ina260_probe_status_dev1,
+                   (unsigned long)g_ina260_probe_status_dev0);
+    }
 
     for (c = 0; c < NUM_CASES; c++) {
         g_addr_x[c] = (uint64_t)(uintptr_t)g_cases[c].Xq;

@@ -36,6 +36,7 @@ print g_total_errors
 print g_timeout_count
 print g_counts_per_second
 
+
 print g_elapsed_counts[0][0]
 print g_elapsed_counts[0][1]
 print g_elapsed_counts[0][2]
@@ -61,6 +62,12 @@ print g_case_elapsed_us[1]
 print g_case_elapsed_us[2]
 print g_total_elapsed_us
 
+print g_case_elapsed_counts[0]
+print g_case_elapsed_counts[1]
+print g_case_elapsed_counts[2]
+print g_total_elapsed_counts
+
+
 print g_mismatch[0][0]
 print g_mismatch[0][1]
 print g_mismatch[0][2]
@@ -73,11 +80,6 @@ print g_mismatch[2][2]
 
 print g_case_index
 print g_proj_index
-
-print g_case_elapsed_counts[0]
-print g_case_elapsed_counts[1]
-print g_case_elapsed_counts[2]
-print g_total_elapsed_counts
 
 print g_y00[0][0]
 print g_y00[0][1]
@@ -128,3 +130,115 @@ print g_first_bad_ref[1][2]
 print g_first_bad_ref[2][0]
 print g_first_bad_ref[2][1]
 print g_first_bad_ref[2][2]
+
+
+print g_ina260_enabled
+print g_ina260_addr
+print g_ina260_sclk_hz
+print g_ina260_init_status
+print g_ina260_ok
+print g_ina260_last_status
+
+print g_ina260_device_id_used
+print g_ina260_cfg_baseaddr
+print g_ina260_probe_status_dev1
+print g_ina260_probe_status_dev0
+
+print g_ina260_debug_step
+print g_ina260_debug_reg
+print g_ina260_debug_wait1
+print g_ina260_debug_send
+print g_ina260_debug_wait2
+print g_ina260_debug_recv
+print g_ina260_debug_wait3
+
+
+print g_idle_power_mw
+print g_idle_current_ma
+print g_idle_bus_mv
+
+print g_power_before_mw[0][0]
+print g_power_before_mw[0][1]
+print g_power_before_mw[0][2]
+print g_power_before_mw[1][0]
+print g_power_before_mw[1][1]
+print g_power_before_mw[1][2]
+print g_power_before_mw[2][0]
+print g_power_before_mw[2][1]
+print g_power_before_mw[2][2]
+
+print g_power_after_mw[0][0]
+print g_power_after_mw[0][1]
+print g_power_after_mw[0][2]
+print g_power_after_mw[1][0]
+print g_power_after_mw[1][1]
+print g_power_after_mw[1][2]
+print g_power_after_mw[2][0]
+print g_power_after_mw[2][1]
+print g_power_after_mw[2][2]
+
+print g_power_avg_mw[0][0]
+print g_power_avg_mw[0][1]
+print g_power_avg_mw[0][2]
+print g_power_avg_mw[1][0]
+print g_power_avg_mw[1][1]
+print g_power_avg_mw[1][2]
+print g_power_avg_mw[2][0]
+print g_power_avg_mw[2][1]
+print g_power_avg_mw[2][2]
+
+print g_current_before_ma[0][0]
+print g_current_before_ma[0][1]
+print g_current_before_ma[0][2]
+print g_current_before_ma[1][0]
+print g_current_before_ma[1][1]
+print g_current_before_ma[1][2]
+print g_current_before_ma[2][0]
+print g_current_before_ma[2][1]
+print g_current_before_ma[2][2]
+
+print g_current_after_ma[0][0]
+print g_current_after_ma[0][1]
+print g_current_after_ma[0][2]
+print g_current_after_ma[1][0]
+print g_current_after_ma[1][1]
+print g_current_after_ma[1][2]
+print g_current_after_ma[2][0]
+print g_current_after_ma[2][1]
+print g_current_after_ma[2][2]
+
+print g_bus_before_mv[0][0]
+print g_bus_before_mv[0][1]
+print g_bus_before_mv[0][2]
+print g_bus_before_mv[1][0]
+print g_bus_before_mv[1][1]
+print g_bus_before_mv[1][2]
+print g_bus_before_mv[2][0]
+print g_bus_before_mv[2][1]
+print g_bus_before_mv[2][2]
+
+print g_bus_after_mv[0][0]
+print g_bus_after_mv[0][1]
+print g_bus_after_mv[0][2]
+print g_bus_after_mv[1][0]
+print g_bus_after_mv[1][1]
+print g_bus_after_mv[1][2]
+print g_bus_after_mv[2][0]
+print g_bus_after_mv[2][1]
+print g_bus_after_mv[2][2]
+
+print g_energy_dyn_nj[0][0]
+print g_energy_dyn_nj[0][1]
+print g_energy_dyn_nj[0][2]
+print g_energy_dyn_nj[1][0]
+print g_energy_dyn_nj[1][1]
+print g_energy_dyn_nj[1][2]
+print g_energy_dyn_nj[2][0]
+print g_energy_dyn_nj[2][1]
+print g_energy_dyn_nj[2][2]
+
+print g_case_energy_dyn_nj[0]
+print g_case_energy_dyn_nj[1]
+print g_case_energy_dyn_nj[2]
+print g_total_energy_dyn_nj
+print g_case_energy_dyn_nj[0]
